@@ -1,0 +1,5 @@
+#save node modules in package.json
+*/node_modules
+
+#stupid os x
+*.DS_Store
