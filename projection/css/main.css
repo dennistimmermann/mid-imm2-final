@@ -1,0 +1,142 @@
+body {
+    background-color: #000;
+}
+
+#projection {
+    width: 1080px;
+    height: 1080px;
+}
+
+/* Buildings */
+.building {
+    position: absolute;
+    background-color: #fff;
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+
+.building.visible {
+    opacity: 1;
+}
+
+
+#sd-building {
+    top: 548px;
+    left: 103px;
+    width: 204px;
+    height: 59px;
+}
+
+#sh-building {
+    top: 330px;
+    left: 105px;
+    width: 180px;
+    height: 161px;
+}
+
+#si-building {
+    top: 534px;
+    left: 359px;
+    width: 558px;
+    height: 87px;
+}
+
+#sl-building {
+    top: 72px;
+    left: 369px;
+    width: 340px;
+    height: 134px;
+}
+
+#sm-building {
+    top: 295px;
+    left: 429px;
+    width: 285px;
+    height: 194px;
+}
+
+#se-building {
+    top: 673px;
+    left: 273px;
+    width: 67px;
+    height: 183px;
+}
+
+
+/* Infofields */
+.infofield {
+    position: absolute;
+    background-color: #777;
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+
+.infofield.visible {
+    opacity: 1;
+}
+
+
+#sd-info {
+    top: 248px;
+    left: 50px;
+    width: 204px;
+    height: 59px;
+}
+
+#sh-info {
+    top: 330px;
+    left: 105px;
+    width: 180px;
+    height: 161px;
+}
+
+#si-info {
+    top: 534px;
+    left: 359px;
+    width: 558px;
+    height: 87px;
+}
+
+#sl-info {
+    top: 72px;
+    left: 369px;
+    width: 340px;
+    height: 134px;
+}
+
+#sm-info {
+    top: 295px;
+    left: 429px;
+    width: 285px;
+    height: 194px;
+}
+
+#se-info {
+    top: 673px;
+    left: 273px;
+    width: 67px;
+    height: 183px;
+}
+
+
+/* Infofields */
+.infofield {
+    width: 450px;
+    height: 360px;
+    position: absolute;
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+
+.infofield .hidden {
+    display: block;
+}
+
+.infofield video,
+.infofield .open {
+    position: absolute;
+    margin-top: 0;
+    margin-left: 0;
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,59 @@
+[
+    {
+        "name": "sd",
+        "x": 103,
+        "y": 548,
+        "width": 204,
+        "height": 161,
+        "buildYear": 1903,
+        "info": {
+            "name": "SD-Gebäude",
+            "text": "Das SD Gebäude beherbergt den Studiengang MID"
+        }
+    },
+
+    {
+        "name": "sh",
+        "x": 105,
+        "y": 330,
+        "width": 180,
+        "height": 161,
+        "buildYear": 2007
+    },
+
+    {
+        "name": "si",
+        "x": 359,
+        "y": 534,
+        "width": 558,
+        "height": 87,
+        "buildYear": 2008
+    },
+
+    {
+        "name": "sl",
+        "x": 369,
+        "y": 72,
+        "width": 340,
+        "height": 134,
+        "buildYear": 2014
+    },
+
+    {
+        "name": "sm",
+        "x": 429,
+        "y": 295,
+        "width": 285,
+        "height": 194,
+        "buildYear": 2013
+    },
+
+    {
+        "name": "se",
+        "x": 273,
+        "y": 673,
+        "width": 67,
+        "height": 183,
+        "buildYear": 1903
+    }
+]
