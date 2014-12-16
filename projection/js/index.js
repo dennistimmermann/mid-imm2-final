@@ -10,12 +10,17 @@ $(document).ready(function() {
         });
 
         setTimeout(function() {
-            currentYear = 2008;
-        }, 5000);
-
-         setTimeout(function() {
-            currentYear = 2014;
+            buildings[0].state = 3;
+            console.log(buildings[0]);
         }, 10000);
+
+        // setTimeout(function() {
+        //     currentYear = 2008;
+        // }, 5000);
+
+        //  setTimeout(function() {
+        //     currentYear = 2014;
+        // }, 10000);
 
         var interval = setInterval(function() {
             for (var i = 0; i < buildings.length; i++) {

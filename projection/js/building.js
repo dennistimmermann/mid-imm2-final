@@ -6,7 +6,7 @@ var Building = (function() {
         this.data = data;
 
         if (data.info) {
-            $('#infofields').append('<div id="' + name + '-infofield" class="infofield"><video class="opening hidden" width="450" height="360" nocontrols><source src="videos/infofield_opening.mp4" type="video/mp4"></video><div class="open hidden"></div><video class="closing hidden" nocontrols><source src="videos/infofield_closing.mp4" type="video/mp4"></video></div>');
+            $('#infofields').append('<div id="' + name + '-infofield" class="infofield"><video class="opening hidden" width="450" height="360" nocontrols><source src="videos/infofield_opening.mp4" type="video/mp4"></video><div class="open hidden"><img src="images/infofield_open.png"></div><video class="closing hidden" nocontrols><source src="videos/infofield_closing.mp4" type="video/mp4"></video></div>');
             this.infoEl = $('#' + name + '-infofield');
             this.infofield = this.infoEl.find('.open');
             this.openingVideo = this.infoEl.find('video.opening');
@@ -17,10 +17,15 @@ var Building = (function() {
 
     Building.prototype.update = function(currentYear) {
         if (this.data.info && this.data.buildYear === currentYear) {
+            // this.openingVideo.removeClass('hidden');
+            // this.openingVideo.get(0).play();
+            // console.log(this.openingVideo.get(0).currentTime);
             if (this.state === 0) {
+                this.infofield.addClass('hidden');
                 this.openingVideo.removeClass('hidden');
                 this.openingVideo.get(0).currentTime = 0;
                 this.openingVideo.get(0).play();
+                console.log(this.openingVideo.get(0).currentTime)
                 this.state = 1;
             }
             else if (this.state === 1 && this.openingVideo.get(0).currentTime >= this.openingVideo.get(0).duration) {
@@ -32,9 +37,12 @@ var Building = (function() {
             else if (this.state === 3) {
                 this.closingVideo.get(0).currentTime = 0;
                 this.infofield.addClass('hidden');
+                this.closingVideo.get(0).play();
                 this.closingVideo.removeClass('hidden');
+                this.state = 4;
             }
-            else if (this.state === 3 && this.closingVideo.get(0).currentTime >= this.closingVideo.get(0).duration) {
+            else if (this.state === 4 && this.closingVideo.get(0).currentTime >= this.closingVideo.get(0).duration) {
+                this.infofield.addClass('hidden');
                 this.closingVideo.addClass('hidden');
                 this.infofield.removeClass('hidden');
                 this.closingVideo.get(0).currentTime = 0;
