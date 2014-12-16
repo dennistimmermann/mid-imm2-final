@@ -1,1 +1,18 @@
-/Users/dennis/Dropbox/Mackup/.jshintrc
+{
+    "asi": true,
+    "boss": true,
+    "laxcomma": true,
+
+    "browser": true,
+    "node": true,
+
+    "curly": false,
+    "freeze": true,
+    "immed": true,
+    "indent": 4,
+    "latedef": "nofunc",
+    "undef": true,
+    "unused": true,
+    "strict": false,
+    "trailing": true
+}
