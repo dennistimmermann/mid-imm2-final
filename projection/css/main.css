@@ -15,7 +15,7 @@ body {
     transition: all 0.25s ease;
 }
 
-.building.visible {
+.visible {
     opacity: 1;
 }
 
@@ -121,22 +121,28 @@ body {
 
 /* Infofields */
 .infofield {
-    width: 450px;
-    height: 360px;
+    width: 225px;
+    height: 180px;
     position: absolute;
     opacity: 0;
     transition: all 0.25s ease;
 }
 
 .infofield .hidden {
-    display: block;
+    display: none;
 }
 
 .infofield video,
 .infofield .open {
+    display: block;
     position: absolute;
     margin-top: 0;
     margin-left: 0;
     width: 100%;
     height: 100%;
+}
+
+.infofield .open {
+    background: url(../images/infofield_open.png) no-repeat center center;
+    background-size: 100% 100%;
 }
