@@ -18,13 +18,13 @@ $(document).ready(function() {
             buildings.push(building);
         });
 
-        // setTimeout(function() {
-        //     changeYear(2014);
-        // }, 10000);
+        setTimeout(function() {
+            changeYear(2014);
+        }, 10000);
 
-        // setTimeout(function() {
-        //     changeYear(2008);
-        // }, 15000);
+        setTimeout(function() {
+            changeYear(2008);
+        }, 15000);
 
         var interval = setInterval(function() {
             for (var i = 0; i < buildings.length; i++) {
