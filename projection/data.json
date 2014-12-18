@@ -8,7 +8,7 @@
         "buildYear": 1903,
         "info": {
             "name": "SD-Gebäude",
-            "text": "Das SD Gebäude beherbergt den Studiengang MID"
+            "text": "Das SD Gebäude wurde von Grund auf saniert und das Dachgeschoss ausgebaut."
         }
     },
 
@@ -18,7 +18,11 @@
         "y": 330,
         "width": 180,
         "height": 161,
-        "buildYear": 2007
+        "buildYear": 2007,
+        "info": {
+            "name": "SH-Gebäude",
+            "text": "Im SH-Gebäude befinden sich Labore der Fakultät IuI. Es wurde im Jahr 2007 erneuert."
+        }
     },
 
     {
@@ -27,7 +31,11 @@
         "y": 534,
         "width": 558,
         "height": 87,
-        "buildYear": 2008
+        "buildYear": 2008,
+        "info": {
+            "name": "SI-Gebäude",
+            "text": "Im SI-Gebäude befindet sich das Medienlabor der technischen Informatik Es wurde im Jahr 2008 umgebaut und erweitert. Das Medienlabor der Hochschule Osnabrück ist eine der zentralen Ausbildung- und Forschungsstätten."
+        }
     },
 
     {
@@ -36,7 +44,11 @@
         "y": 72,
         "width": 340,
         "height": 134,
-        "buildYear": 2014
+        "buildYear": 2014,
+        "info": {
+            "name": "SL-Gebäude",
+            "text": "Mit einem Bauvolumen von fast 23 Mio. € ist der Hörsaalneubau am Westerberg ein Großprojekt."
+        }
     },
 
     {
@@ -45,7 +57,11 @@
         "y": 295,
         "width": 285,
         "height": 194,
-        "buildYear": 2013
+        "buildYear": 2013,
+        "info": {
+            "name": "Mensa",
+            "text": "Text"
+        }
     },
 
     {

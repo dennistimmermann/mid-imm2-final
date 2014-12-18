@@ -66,7 +66,8 @@ body {
 /* Infofields */
 .infofield {
     position: absolute;
-    background-color: #777;
+    width: 190px;
+    height: 180px;
     opacity: 0;
     transition: all 0.25s ease;
 }
@@ -76,46 +77,29 @@ body {
 }
 
 
-#sd-info {
-    top: 248px;
-    left: 50px;
-    width: 204px;
-    height: 59px;
+#sd-infofield,
+#se-infofield {
+    top: 675px;
+    left: 58px;
+    transform: rotate(90deg)
 }
 
-#sh-info {
-    top: 330px;
-    left: 105px;
-    width: 180px;
-    height: 161px;
+#si-infofield {
+    top: 676px;
+    left: 476px;
 }
 
-#si-info {
-    top: 534px;
-    left: 359px;
-    width: 558px;
-    height: 87px;
-}
-
-#sl-info {
+#sl-infofield,
+#sh-infofield {
     top: 72px;
-    left: 369px;
-    width: 340px;
-    height: 134px;
+    left: 105px;
+    transform: rotate(180deg);
 }
 
-#sm-info {
-    top: 295px;
-    left: 429px;
-    width: 285px;
-    height: 194px;
-}
-
-#se-info {
-    top: 673px;
-    left: 273px;
-    width: 67px;
-    height: 183px;
+#sm-infofield {
+    top: 301px;
+    left: 728px;
+    transform: rotate(270deg);
 }
 
 

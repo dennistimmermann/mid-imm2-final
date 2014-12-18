@@ -2,6 +2,15 @@ var currentYear = 1903;
 var buildings = [];
 var infofields = [];
 
+function changeYear(year) {
+    currentYear = year;
+    for (var i = 0; i < buildings.length; i++) {
+        if (buildings[i].data && buildings[i].active === true) {
+            buildings[i].state = 3;
+        }
+    }
+}
+
 $(document).ready(function() {
     $.getJSON('data.json', function(json) {
         $.each(json, function(i, data) {
@@ -9,18 +18,13 @@ $(document).ready(function() {
             buildings.push(building);
         });
 
-        setTimeout(function() {
-            buildings[0].state = 3;
-            console.log(buildings[0]);
-        }, 10000);
+        // setTimeout(function() {
+        //     changeYear(2014);
+        // }, 10000);
 
         // setTimeout(function() {
-        //     currentYear = 2008;
-        // }, 5000);
-
-        //  setTimeout(function() {
-        //     currentYear = 2014;
-        // }, 10000);
+        //     changeYear(2008);
+        // }, 15000);
 
         var interval = setInterval(function() {
             for (var i = 0; i < buildings.length; i++) {
