@@ -62,6 +62,53 @@ WebFontConfig = {
  * LOGIC
  */
 
+
+var yearContainer = new PIXI.DisplayObjectContainer()
+var years = []
+
+for(var y = 1980; y <= 2014; y++) {
+
+	var o = {}
+
+	o.blur = new PIXI.BlurFilter()
+	o.text = new PIXI.Text(' '+y+' ', {
+		font: "64px Roboto",
+		fill: "red"
+	})
+
+	o.text.anchor.set(0.5, 0.25)
+	o.text.filters = [o.blur]
+
+	o.text.x = yearContainer.getLocalBounds().width
+	yearContainer.addChild(o.text)
+	years.push(o)
+}
+
+yearContainer.y = 100
+stage.addChild(yearContainer)
+
+document.addEventListener('keydown', function(e) {
+	if(e.keyCode == 37) {
+		//left
+		yearContainer.x -= 10
+	} else if(e.keyCode == 39) {
+		//right
+		yearContainer.x += 10
+	}
+
+	updateText(yearContainer)
+})
+
+var updateText = function(parent) {
+	years.forEach(function(e, i, arr) {
+		var scale = 1-Math.abs(width/2 - (e.text.x+parent.x))/(width/2)
+		//console.log(e)
+		e.text.scale.set(scale, scale)
+		e.text.alpha = 1-Math.abs(width/2 - (e.text.x+parent.x))/(width/2)
+		e.blur.blur = Math.abs(width/2 - (e.text.x+parent.x)) * 0.05
+	})
+}
+
 var ttext = new PIXI.Text(' 2014 ', {
 	font: "50px Roboto",
 	fill: "red"
@@ -98,6 +145,12 @@ var triangle = function() {
 ttext.filters = [textBlur]
 
 stage.addChild(ttext);
+
+
+/**
+ * triangle stuff
+ */
+
 
 var triangleContainer = new PIXI.DisplayObjectContainer()
 var graphics = new PIXI.Graphics()
