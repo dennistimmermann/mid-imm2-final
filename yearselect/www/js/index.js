@@ -66,7 +66,7 @@ WebFontConfig = {
 var yearContainer = new PIXI.DisplayObjectContainer()
 var years = []
 
-for(var y = 1980; y <= 2014; y++) {
+for(var y = 1906; y <= 2015; y++) {
 
 	var o = {}
 
