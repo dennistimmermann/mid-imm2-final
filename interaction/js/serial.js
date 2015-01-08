@@ -1,12 +1,6 @@
-"use strict";
-
-/**
- * bridge between imm2 visualisation and arduino interface
- */
-
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort
-var serialPort = new SerialPort("/dev/tty.usbmodem1411", {
+var serialPort = new SerialPort("/dev/tty.usbmodem1414331", {
   baudrate: 9600,
   parser: serialport.parsers.readline("\n")
 });
@@ -22,8 +16,8 @@ var mean = function (arr)
 
 
 var wmean = require( 'compute-wmean' )
-  , sampleSize = 10
-  , weighting = 0.25
+  , sampleSize = 20
+  , weighting = 0.5
 
 var last = 0;
 
@@ -79,42 +73,6 @@ serialPort.on("open", function () {
 });
 
 
-var WebSocketServer = require('ws').Server
-var wss = new WebSocketServer({port: 8069})
-
-var app = {}
-
-app.clients = []
-
-app.sendTap = function() {
-	var o = {}
-	o.type = 'tap'
-}
-
-app.sendSwipe = function() {
-	var o = {}
-	o.type = 'swipe'
-}
-
-
-wss.on('connection', function(ws) {
-	// in a connection
-	//
-	console.log('*')
-	//ws.send(JSON.stringify({type:'tap', point: 0}))
-
-	var timer = setInterval(function() {
-		//console.log(wmean(past.values, past.weights))
-		ws.send(JSON.stringify({type:'swipe', velocity: wmean(past.values, past.weights)}))
-	},50)
-
-	ws.on('message', function(m) {
-		console.log('received: %s', m)
-	})
-
-
-})
-
-//do magic
-//
-//done
+var timer = setInterval(function() {
+	console.log(wmean(past.values, past.weights))
+},50)
