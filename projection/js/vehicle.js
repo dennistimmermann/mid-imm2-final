@@ -31,31 +31,33 @@ var Vehicle = (function() {
                 this.el.addClass('down');
         }
 
+        var vehicleLength = this._randomInt(1, 3);
+
         switch(this._randomInt(1, 4)) {
             case 1: 
                 this.type = 'bicycle'; 
-                this.speed = 1; 
-                this.el.addClass('bicycle-' + this._randomInt(1, 3)); 
+                this.speed = vehicleLength/1.5; 
+                this.el.addClass('bicycle-' + vehicleLength); 
                 break;
             case 3: 
                 this.type = 'bus'; 
-                this.speed = 2; 
-                this.el.addClass('bus-' + this._randomInt(1, 3)); 
+                this.speed = (vehicleLength * 2)/1.5; 
+                this.el.addClass('bus-' + vehicleLength); 
                 break;
             case 2: 
                 this.type = 'car'; 
-                this.speed = 3; 
-                this.el.addClass('car-' + this._randomInt(1, 3)); 
+                this.speed = (vehicleLength * 3)/1.5; 
+                this.el.addClass('car-' + vehicleLength); 
                 break;
             case 4: 
                 this.type = 'train'; 
-                this.speed = 4; 
-                this.el.addClass('train-' + this._randomInt(1, 3)); 
+                this.speed = (vehicleLength * 4)/1.5; 
+                this.el.addClass('train-' + vehicleLength); 
                 break;
             default: 
                 this.type = 'bus'; 
-                this.speed = 2; 
-                this.el.addClass('bus-' + this._randomInt(1, 3));
+                this.speed = (vehicleLength * 2)/1.5; 
+                this.el.addClass('bus-' + vehicleLength);
         }
 
         console.log(this);
