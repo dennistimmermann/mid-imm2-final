@@ -3,7 +3,7 @@
  */
 
 var width = window.innerWidth
-var height = window.innerHeight
+var height = 200
 
 //var time = 0
 var start = null
@@ -12,7 +12,7 @@ var time = 0
 var entities = {}
 
 // create an new instance of a pixi stage
-var stage = new PIXI.Stage(0xFFFFFF)
+var stage = new PIXI.Stage(0x000000)
 
 //  create a renderer instance.
 var renderer = PIXI.autoDetectRenderer(width, height)
@@ -40,7 +40,7 @@ var canvas = document.getElementById('yearcanvas')
 
 WebFontConfig = {
   google: {
-    families: [ 'Roboto', 'Arvo:700italic', 'Podkova:700' ]
+    families: [ 'Roboto' ]
   },
   active: function() {
     // do something

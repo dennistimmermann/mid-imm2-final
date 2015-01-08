@@ -181,6 +181,7 @@ body {
     position: absolute;
     left: 1000px;
     background-size: 100% 100%;
+    z-index: 100;
 }
 
 #vehicle.down {
@@ -269,4 +270,9 @@ body {
 .train-3 {
     height: calc(185px/3);
     background: url('../images/zug_3.png') no-repeat center center;
+}
+
+/* controls */
+#controls {
+    z-index: 1000;
 }
