@@ -6,7 +6,7 @@ var Building = (function() {
         this.data = data;
 
         if (data.info) {
-            $('#infofields').append('<div id="' + name + '-infofield" class="infofield"><video class="opening hidden" width="450" height="360" nocontrols><source src="videos/infofield_opening_' + this.data.info.faculty + '.mp4" type="video/mp4"></video><div class="open hidden"><img src="images/infofield_open_' + this.data.info.faculty + '.png"><h1>' + this.data.info.name + '</h1><p>' + this.data.info.text + '</p></div><video class="closing hidden" nocontrols><source src="videos/infofield_closing_' + this.data.info.faculty + '.mp4" type="video/mp4"></video></div>');
+            $('#infofields').append('<div id="' + name + '-infofield" class="infofield"><video class="opening hidden" width="450" height="360" nocontrols><source src="videos/infofield_opening_' + this.data.info.faculty + '.mp4" type="video/mp4"></video><div class="open hidden"><img src="images/infofield_open_' + this.data.info.faculty + '.png"><div class="infofield_content"><img class="infofield_icon" src="images/icon_' + name + '.png"><div class="heading"><h2>' + this.data.buildYear + '</h2><h1>' + this.data.info.name + '</h1></div><p>' + this.data.info.text + '</p></div></div><video class="closing hidden" nocontrols><source src="videos/infofield_closing_' + this.data.info.faculty + '.mp4" type="video/mp4"></video></div>');
             this.infoEl = $('#' + name + '-infofield');
             this.infofield = this.infoEl.find('.open');
             this.openingVideo = this.infoEl.find('video.opening');

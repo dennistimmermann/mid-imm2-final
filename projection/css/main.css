@@ -74,19 +74,40 @@ body {
     transition: all 0.25s ease;
 }
 
-.infofield h1,
+.infofield_content {
+    margin-top: -160px;
+}
+
+.infofield_content .heading {
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 90px;
+}
+
+.infofield_icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 50px;
+}
+
 .infofield p {
-    padding: 0 35px;
+    padding: 0 30px 0 50px;
 }
 
 .infofield h1 {
-    margin-top: -130px;
     font-size: 0.875rem;
-    text-align: center;
+    font-weight: 700;
+    margin: 2px 0;
+}
+
+.infofield h2 {
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin: 2px 0;
 }
 
 .infofield p {
-    font-size: 0.75rem;
+    font-size: 0.625rem;
     font-weight: 100;
 }
 
@@ -153,4 +174,99 @@ body {
 .infofield .open img {
     max-width: 100%;
     max-height: 100%;
+}
+
+/* Vehicle */
+#vehicle {
+    position: absolute;
+    left: 1000px;
+    background-size: 100% 100%;
+}
+
+#vehicle.down {
+    -webkit-transform: rotate(180deg);
+}
+
+.bicycle-1,
+.bicycle-2,
+.bicycle-3 {
+    width: calc(48px/3);
+}
+
+.bicycle-1 {
+    height: calc(68px/3);
+    background: url('../images/rad_1.png') no-repeat center center;
+}
+
+.bicycle-2 {
+    height: calc(88px/3);
+    background: url('../images/rad_2.png') no-repeat center center;
+}
+
+.bicycle-3 {
+    height: calc(108px/3);
+    background: url('../images/rad_3.png') no-repeat center center;
+}
+
+.bus-1,
+.bus-2,
+.bus-3 {
+    width: calc(46px/3);
+}
+
+.bus-1 {
+    height: calc(85px/3);
+    background: url('../images/bus_1.png') no-repeat center center;
+}
+
+.bus-2 {
+    height: calc(105px/3);
+    background: url('../images/bus_2.png') no-repeat center center;
+}
+
+.bus-3 {
+    height: calc(125px/3);
+    background: url('../images/bus_3.png') no-repeat center center;
+}
+
+.car-1,
+.car-2,
+.car-3 {
+    width: calc(45px/3);
+}
+
+.car-1 {
+    height: calc(85px/3);
+    background: url('../images/auto_1.png') no-repeat center center;
+}
+
+.car-2 {
+    height: calc(125px/3);
+    background: url('../images/auto_2.png') no-repeat center center;
+}
+
+.car-3 {
+    height: calc(185px/3);
+    background: url('../images/auto_3.png') no-repeat center center;
+}
+
+.train-1,
+.train-2,
+.train-3 {
+    width: calc(46px/3);
+}
+
+.train-1 {
+    height: calc(105px/3);
+    background: url('../images/zug_1.png') no-repeat center center;
+}
+
+.train-2 {
+    height: calc(145px/3);
+    background: url('../images/zug_2.png') no-repeat center center;
+}
+
+.train-3 {
+    height: calc(185px/3);
+    background: url('../images/zug_3.png') no-repeat center center;
 }
