@@ -2,22 +2,27 @@
  * SETUP
  */
 
+var firstyear = 1980
+  , lastyear = 2015
+  , yearspacing = 200
+
 var width = window.innerWidth
-var height = 200
+var height = window.innerHeight
 
 //var time = 0
 var start = null
 var time = 0
 
 var entities = {}
+var velocity = 0;
 
 // create an new instance of a pixi stage
-var stage = new PIXI.Stage(0x000000)
+var stage = new PIXI.Stage(0xFFFFFF)
 
 //  create a renderer instance.
 var renderer = PIXI.autoDetectRenderer(width, height)
 
-    // add the renderer view element to the DOM
+// add the renderer view element to the DOM
 document.body.appendChild(renderer.view)
 
 requestAnimFrame(animate)
@@ -27,6 +32,16 @@ function animate(timestamp) {
 	time = timestamp
     // render the stage
     renderer.render(stage)
+
+    if(velocity != 0) {
+    	yearContainer.x -=velocity*10
+    	updateText(yearContainer)
+    }
+
+    velocity = velocity/1.1
+    if(Math.abs(velocity) < 0.00001) {
+		velocity = 0
+	}
 
     requestAnimFrame(animate)
 }
@@ -40,7 +55,7 @@ var canvas = document.getElementById('yearcanvas')
 
 WebFontConfig = {
   google: {
-    families: [ 'Roboto' ]
+    families: [ 'Roboto', 'Arvo:700italic', 'Podkova:700' ]
   },
   active: function() {
     // do something
@@ -66,7 +81,7 @@ WebFontConfig = {
 var yearContainer = new PIXI.DisplayObjectContainer()
 var years = []
 
-for(var y = 1980; y <= 2014; y++) {
+for(var y = firstyear; y <= lastyear; y++) {
 
 	var o = {}
 
@@ -79,7 +94,7 @@ for(var y = 1980; y <= 2014; y++) {
 	o.text.anchor.set(0.5, 0.25)
 	o.text.filters = [o.blur]
 
-	o.text.x = yearContainer.getLocalBounds().width
+	o.text.x = (y - firstyear) * yearspacing
 	yearContainer.addChild(o.text)
 	years.push(o)
 }
@@ -96,7 +111,30 @@ document.addEventListener('keydown', function(e) {
 		yearContainer.x += 10
 	}
 
+
+
+	var curpos = (yearContainer.x - width/2)
+	var intpos = curpos%yearspacing
+	var curyear = Math.round(-1*curpos/yearspacing+firstyear)
+
+	if(intpos > -100) {
+		//left
+		//curyear = Math.round(-1*curpos/200+firstyear)
+		//console.log("right of", )
+	} else {
+		//right
+		//console.log("left of", Math.round(-1*curpos/200+firstyear))
+	}
+	if(e.keyCode == 38) {
+		//center
+		console.log(curyear)
+		console.log((curyear-firstyear)*yearspacing + width/2)
+		yearContainer.x = -1*((curyear-firstyear)*yearspacing - width/2)
+	}
+
 	updateText(yearContainer)
+
+	console.log( (yearContainer.x - width/2)%200 )
 })
 
 var updateText = function(parent) {
@@ -144,8 +182,9 @@ var onMessage = function(evt) {
 		if(action.type == 'swipe') {
 			// do stuff
 			console.log(action)
-			yearContainer.x -=action.velocity*10;
-			updateText(yearContainer)
+			velocity = action.velocity
+			//yearContainer.x -=action.velocity*5;
+			//updateText(yearContainer)
 			//	{
 			// 		type: 'swipe',
 			// 		direction: 'left'|'right',
@@ -160,3 +199,8 @@ var onMessage = function(evt) {
 connect()
 
 
+var snaptimer;
+
+var snap = function() {
+
+}
