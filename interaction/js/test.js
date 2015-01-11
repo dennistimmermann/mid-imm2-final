@@ -1,11 +1,21 @@
-var wmean = require( 'compute-wmean' );
+var rl = require("readline");
+var prompts = rl.createInterface(process.stdin, process.stdout);
 
-var data = new Array( 100 ),
-    weights = new Array( 100 );
-
-for ( var i = 0; i < data.length; i++ ) {
-    data[ i ] = Math.random()*100;
-    weights[ i ] = Math.random();
+var i = 0;
+while(i < 9999) {
+  if(i == 0) {
+    prompts.question("How many glass of water do you drink each day?", function (glasses) {
+    var message = "";
+    if (glasses > 5) {
+        message = "Great! Water is the key of a healthy life.";
+    } else {
+        message = "Are you drinking just " + glasses + " glass of water? You should drink at least " + (6 - glasses) + " more.";
+    }
+    console.log(i, message);
+    process.exit();
+    });
+  }
+  i++;
 }
 
-console.log( wmean( data, weights ) );
+

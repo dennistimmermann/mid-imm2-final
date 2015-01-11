@@ -1,0 +1,14 @@
+{
+  "port": "/dev/tty.usbmodem376271",
+  "samplesize": 20,
+  "threshold": 10,
+  "jitter": 0.005,
+  "left": {
+    "min": 1354.28,
+    "max": 1556.304
+  },
+  "right": {
+    "min": 1220.08,
+    "max": 1434.24
+  }
+}

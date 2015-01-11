@@ -6,7 +6,7 @@
 
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort
-var serialPort = new SerialPort("/dev/tty.usbmodem1411", {
+var serialPort = new SerialPort("/dev/tty.usbmodem1414331", {
   baudrate: 9600,
   parser: serialport.parsers.readline("\n")
 });
@@ -28,6 +28,7 @@ var wmean = require( 'compute-wmean' )
 var last = 0;
 
 var past = {}
+past.val = 0
 past.values = []
 past.weights = []
 past.add = function(v) {
@@ -52,7 +53,7 @@ serialPort.on("open", function () {
 
 	    var val = 0;
 
-	    if(data.left > 0 && data.right > 0) {
+	    if(data.left > 30 && data.right > 30) {
 	    	val = data.left-data.right-last
 	    }
 	    last = data.left - data.right

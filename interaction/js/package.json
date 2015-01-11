@@ -11,8 +11,10 @@
   "dependencies": {
     "compute-wmean": "^1.0.0",
     "filters": "^1.0.6",
+    "jsonfile": "^2.0.0",
     "lodash": "^2.4.1",
     "nostradamus": "^0.1.0",
+    "readline-sync": "^0.4.10",
     "serialport": "^1.4.10",
     "ws": "^0.6.3"
   }
