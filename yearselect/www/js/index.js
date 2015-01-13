@@ -3,7 +3,7 @@ var firstyear = 1900,
     yearspacing = 200;
 
 var width = window.innerWidth;
-var height = window.innerHeight;
+var height = 200;
 
 //var time = 0
 var start = null;
@@ -13,13 +13,13 @@ var entities = {};
 var velocity = 0;
 
 // create an new instance of a pixi stage
-var stage = new PIXI.Stage( 0xFFFFFF );
+var stage = new PIXI.Stage( 0x000000 );
 
 //  create a renderer instance.
 var renderer = PIXI.autoDetectRenderer( width, height );
 
 // add the renderer view element to the DOM
-document.body.appendChild( renderer.view );
+document.getElementById('controls').appendChild( renderer.view );
 
 requestAnimFrame( animate );
 
@@ -58,7 +58,7 @@ var canvas = document.getElementById( 'yearcanvas' );
 
 WebFontConfig = {
     google: {
-        families: ['Roboto', 'Arvo:700italic', 'Podkova:700']
+        families: ['Roboto']
     },
     active: function() {
         // do something
@@ -91,7 +91,7 @@ for (var y = firstyear; y <= lastyear; y++) {
     o.blur = new PIXI.BlurFilter();
     o.text = new PIXI.Text( ' ' + y + ' ', {
         font: '64px Roboto',
-        fill: 'red'
+        fill: '#ffffff'
     } );
 
     o.text.anchor.set( 0.5, 0.25 );
@@ -242,17 +242,23 @@ tweens.push( new TWEEN.Tween( yearContainer ).to( {
 var dtw1 = new TWEEN.Tween( yearContainer ).to( {
     x: '-200'
 }, 1000 )
-    .easing( TWEEN.Easing.Cubic.InOut );
+    .easing( TWEEN.Easing.Cubic.InOut ).onComplete(function() {
+        changeYear(2008)
+    });
 
 var dtw2 = new TWEEN.Tween( yearContainer ).to( {
     x: '-1200'
 }, 3000 )
-    .easing( TWEEN.Easing.Cubic.InOut );
+    .easing( TWEEN.Easing.Cubic.InOut ).onComplete(function() {
+        changeYear(2014)
+    });
 
 var dtw3 = new TWEEN.Tween( yearContainer ).to( {
     x: '+22200'
 }, 5000 )
-    .easing( TWEEN.Easing.Cubic.InOut );
+    .easing( TWEEN.Easing.Cubic.InOut ).onComplete(function() {
+        changeYear(1903)
+    });
 
 // var dtw4 = new TWEEN.Tween( yearContainer ).to( { x: "-2000"}, 1000 )
 //    .easing( TWEEN.Easing.Exponential.InOut )

@@ -1,4 +1,4 @@
-var currentYear = 1903;
+var currentYear = 2007;
 var buildings = [];
 var infofields = [];
 var vehicle = new Vehicle();
@@ -34,14 +34,6 @@ $(document).ready(function() {
         });
 
         vehicleInterval = setInterval(launchVehicle, 100);
-
-        // setTimeout(function() {
-        //     changeYear(2014);
-        // }, 10000);
-
-        // setTimeout(function() {
-        //     changeYear(2008);
-        // }, 15000);
 
         var interval = setInterval(function() {
             animation = false;
