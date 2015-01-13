@@ -267,7 +267,7 @@ var dtw3 = new TWEEN.Tween( yearContainer ).to( {
 // var dtw4 = new TWEEN.Tween( yearContainer ).to( { x: "-2000"}, 1000 )
 //    .easing( TWEEN.Easing.Exponential.InOut )
 
-var changeYear = function() {};
+// var changeYear = function() {};
 
 tweens.forEach( function(e, i, arr) {
     if (arr[i + 1] != null) {

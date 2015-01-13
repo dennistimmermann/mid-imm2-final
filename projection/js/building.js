@@ -19,17 +19,18 @@ var Building = (function() {
     }
 
     Building.prototype.update = function(currentYear) {
-        if (this.data.info && this.data.buildYear === currentYear) { 
+        if (this.data.buildYear === currentYear) { 
             this.animateIn();
         }
 
-        if (this.data.info && this.data.buildYear !== currentYear) {
+        if (this.data.buildYear !== currentYear) {
             this.animateOut();
         }
 
 
         if (this.data.buildYear <= currentYear) {
             this.buildingEl.addClass('visible');
+            this.animateIn();
 
             if (this.data.info) {
                 this.infoEl.addClass('visible');
