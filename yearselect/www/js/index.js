@@ -19,7 +19,7 @@ var stage = new PIXI.Stage( 0x000000 );
 var renderer = PIXI.autoDetectRenderer( width, height );
 
 // add the renderer view element to the DOM
-document.getElementById('controls').appendChild( renderer.view );
+document.getElementById( 'controls' ).appendChild( renderer.view );
 
 requestAnimFrame( animate );
 
@@ -146,7 +146,7 @@ var updateText = function(parent) {
     } );
 };
 
-var wsUri = 'ws://localhost:8069/';
+var wsUri = 'ws://nomnom-server.tmrmn.com';
 var websocket;
 
 var connect = function() {
@@ -174,31 +174,35 @@ var onClose = function(evt) {
 
 var onMessage = function(evt) {
     //console.log('>', evt.data);
-    decode( evt.data, function(action) {
-        if (action.type == 'tap') {
-            // do stuff
-            console.log( action );
-            //	{
-            //		type: 'tap',
-            //		point: [Number 0..3]		<- welcher punkt angetippt wurde. Fuer den prototypen 0 bis 3
-            //	}
-        }
-        if (action.type == 'swipe') {
-            // do stuff
-            console.log( action );
-            velocity = action.velocity;
-            //yearContainer.x -=action.velocity*5;
-            //updateText(yearContainer)
-            //	{
-            // 		type: 'swipe',
-            // 		direction: 'left'|'right',
-            // 		velocity: [Number],			<- weiß noch noicht, ob das genutzt wird. Damit die Jahre bei der anzeige langsam stoppen und nicht abrupt
-            // 		step: [Number]				<- wie viele jahre weiter/zurück geblättert werden soll. Wahrscheinlich eher über velocity
-            //	}
-        }
-    }, function(e) {
-            console.log( 'oh noes,\n', e );
-        } );
+    // decode( evt.data, function(action) {
+    //     if (action.type == 'tap') {
+    //         // do stuff
+    //         console.log( action );
+    //         //	{
+    //         //		type: 'tap',
+    //         //		point: [Number 0..3]		<- welcher punkt angetippt wurde. Fuer den prototypen 0 bis 3
+    //         //	}
+    //     }
+    //     if (action.type == 'swipe') {
+    //         // do stuff
+    //         console.log( action );
+    //         velocity = action.velocity;
+    //         //yearContainer.x -=action.velocity*5;
+    //         //updateText(yearContainer)
+    //         //	{
+    //         // 		type: 'swipe',
+    //         // 		direction: 'left'|'right',
+    //         // 		velocity: [Number],			<- weiß noch noicht, ob das genutzt wird. Damit die Jahre bei der anzeige langsam stoppen und nicht abrupt
+    //         // 		step: [Number]				<- wie viele jahre weiter/zurück geblättert werden soll. Wahrscheinlich eher über velocity
+    //         //	}
+    //     }
+    // }, function(e) {
+    //         console.log( 'oh noes,\n', e );
+    //     } );
+
+    if (evt.data == 'next') {
+        advance();
+    }
 };
 connect();
 
@@ -242,27 +246,28 @@ tweens.push( new TWEEN.Tween( yearContainer ).to( {
 var dtw1 = new TWEEN.Tween( yearContainer ).to( {
     x: '-200'
 }, 1000 )
-    .easing( TWEEN.Easing.Cubic.InOut ).onComplete(function() {
-        changeYear(2008)
-    });
+    .easing( TWEEN.Easing.Cubic.InOut ).onComplete( function() {
+    changeYear( 2008 );
+} );
 
 var dtw2 = new TWEEN.Tween( yearContainer ).to( {
     x: '-1200'
 }, 3000 )
-    .easing( TWEEN.Easing.Cubic.InOut ).onComplete(function() {
-        changeYear(2014)
-    });
+    .easing( TWEEN.Easing.Cubic.InOut ).onComplete( function() {
+    changeYear( 2014 );
+} );
 
 var dtw3 = new TWEEN.Tween( yearContainer ).to( {
     x: '+22200'
 }, 5000 )
-    .easing( TWEEN.Easing.Cubic.InOut ).onComplete(function() {
-        changeYear(1903)
-    });
+    .easing( TWEEN.Easing.Cubic.InOut ).onComplete( function() {
+    changeYear( 1903 );
+} );
 
 // var dtw4 = new TWEEN.Tween( yearContainer ).to( { x: "-2000"}, 1000 )
 //    .easing( TWEEN.Easing.Exponential.InOut )
 
+var changeYear = function() {};
 
 tweens.forEach( function(e, i, arr) {
     if (arr[i + 1] != null) {
@@ -281,7 +286,7 @@ var setYear = function(year) {
 
 setYear( 2007 );
 
-document.addEventListener( 'click', function() {
+var advance = function() {
     switch (dummyStep) {
         case 0:
             dtw1.start();
@@ -299,6 +304,8 @@ document.addEventListener( 'click', function() {
         // 	break;
     }
     dummyStep++;
+};
 
-
+document.addEventListener( 'click', function() {
+    advance();
 } );
