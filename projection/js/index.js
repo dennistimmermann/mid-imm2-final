@@ -3,6 +3,7 @@ var buildings = [];
 var infofields = [];
 var vehicle = new Vehicle();
 var vehicleInterval = null;
+var animation = false;
 
 function changeYear(year) {
     currentYear = year;
@@ -43,7 +44,13 @@ $(document).ready(function() {
         // }, 15000);
 
         var interval = setInterval(function() {
+            animation = false;
+
             for (var i = 0; i < buildings.length; i++) {
+                if (buildings[i].state !== 2) {
+                    animation = true;
+                }
+
                 buildings[i].update(currentYear);
             }
 

@@ -1,7 +1,3 @@
-/**
- * SETUP
- */
-
 var firstyear = 1980
   , lastyear = 2015
   , yearspacing = 200
@@ -31,6 +27,11 @@ function animate(timestamp) {
 	if(!start) start = timestamp
 	time = timestamp
     // render the stage
+
+    TWEEN.update(timestamp);
+
+    updateText(yearContainer)
+
     renderer.render(stage)
 
     if(velocity != 0) {
@@ -111,8 +112,6 @@ document.addEventListener('keydown', function(e) {
 		yearContainer.x += 10
 	}
 
-
-
 	var curpos = (yearContainer.x - width/2)
 	var intpos = curpos%yearspacing
 	var curyear = Math.round(-1*curpos/yearspacing+firstyear)
@@ -131,8 +130,6 @@ document.addEventListener('keydown', function(e) {
 		console.log((curyear-firstyear)*yearspacing + width/2)
 		yearContainer.x = -1*((curyear-firstyear)*yearspacing - width/2)
 	}
-
-	updateText(yearContainer)
 
 	console.log( (yearContainer.x - width/2)%200 )
 })
@@ -204,3 +201,42 @@ var snaptimer;
 var snap = function() {
 
 }
+
+
+/// demo code
+///
+
+var tweens = []
+var twi = 0
+
+
+tweens.push(new TWEEN.Tween( yearContainer ).to( { x: "+300"}, 1500 )
+    .easing( TWEEN.Easing.Exponential.InOut ))
+
+tweens.push(new TWEEN.Tween( yearContainer ).to( { x: "-200"}, 1000 )
+    .easing( TWEEN.Easing.Exponential.InOut ))
+
+tweens.push(new TWEEN.Tween( yearContainer ).to( { x: "+500"}, 1000 )
+    .easing( TWEEN.Easing.Exponential.InOut ))
+
+
+tweens.push(new TWEEN.Tween( yearContainer ).to( { x: "-3400"}, 2000 )
+    .easing( TWEEN.Easing.Exponential.InOut ))
+
+
+tweens.forEach(function(e, i, arr) {
+	if(arr[i+1] != null) {
+		var next = arr[i+1]
+		e.onComplete(function() {
+			next.start()
+		})
+	}
+})
+
+tweens[0].start()
+
+document.addEventListener('keydown', function(e) {
+
+
+
+})

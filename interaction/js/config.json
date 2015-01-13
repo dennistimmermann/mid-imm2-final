@@ -1,14 +1,40 @@
 {
   "port": "/dev/tty.usbmodem376271",
   "samplesize": 20,
-  "threshold": 10,
-  "jitter": 0.005,
-  "left": {
-    "min": 1354.28,
-    "max": 1556.304
+  "threshold": 0,
+  "jitter": 0.05,
+  "up": {
+    "min": {
+      "left": 1467.92,
+      "right": 1602.52
+    },
+    "max": {
+      "left": 1514.84,
+      "right": 1701.18
+    },
+    "scaling": 0.9547328685766879
   },
-  "right": {
-    "min": 1220.08,
-    "max": 1434.24
+  "down": {
+    "min": {
+      "left": 1458.88,
+      "right": 1344.94
+    },
+    "max": {
+      "left": 1564.2,
+      "right": 1389.04
+    },
+    "scaling": 0.9494047215939105
+  },
+  "common": {
+    "min": {
+      "left": 1736.94,
+      "right": 1773.8,
+      "avg": 1755.37
+    },
+    "max": {
+      "left": 1799.14,
+      "right": 1819.66,
+      "avg": 1809.4
+    }
   }
 }
