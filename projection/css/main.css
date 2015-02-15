@@ -13,7 +13,7 @@ body {
 .building {
     position: absolute;
     /*background-color: #fff;*/
-    opacity: 0;
+    /*opacity: 0;*/
     transition: all 0.25s ease;
 }
 
@@ -290,11 +290,11 @@ body {
 #controls {
     position: absolute;
     z-index: 1000;
-    bottom: 0;
-    width: 100%;
+    top: 950px;
+    width: 1080px;
     height: 200px;
 }
 
 #controls canvas {
-    /*margin-top: -75px;*/
+    margin-top: -75px;
 }

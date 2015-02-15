@@ -7,6 +7,7 @@ var Building = (function() {
         this.closingVideo = this.buildingEl.find('video.closing');
         this.data = data;
         this.state = 0;
+        this.infofieldState = 0;
         this.active = false;
 
         if (data.info) {
@@ -20,16 +21,15 @@ var Building = (function() {
 
     Building.prototype.update = function(currentYear) {
         if (this.data.buildYear === currentYear) { 
-            this.animateIn();
+            this.animateInfoIn();
         }
 
         if (this.data.buildYear !== currentYear) {
-            this.animateOut();
+            this.animateInfoOut();
         }
 
 
         if (this.data.buildYear <= currentYear) {
-            this.buildingEl.addClass('visible');
             this.animateIn();
 
             if (this.data.info) {
@@ -37,12 +37,22 @@ var Building = (function() {
             }
         }
         else {
-            this.buildingEl.removeClass('visible');
+            this.animateOut();
 
             if (this.data.info) {
                 this.infoEl.removeClass('visible');
             }
         }
+    };
+
+    Building.prototype.close = function(currentYear) {
+        if (this.infofieldState === 2 && this.data.buildYear !== currentYear) {
+            this.infofieldState = 3;
+        }
+
+        if (this.state === 2 && this.data.buildYear >= currentYear) {
+            this.state = 3;
+        } 
     };
 
     Building.prototype.animateIn = function() {
@@ -51,24 +61,12 @@ var Building = (function() {
             this.openingVideo.removeClass('hidden');
             this.openingVideo.currentTime = 0;
             this.openingVideo.get(0).play();
-
-            if (this.data.info) {
-                this.infofield.addClass('hidden');
-                this.infofieldOpeningVideo.removeClass('hidden');
-                this.infofieldOpeningVideo.get(0).currentTime = 0;
-                this.infofieldOpeningVideo.get(0).play();
-            }
             this.state = 1;
         }
         else if (this.state === 1 && this.openingVideo.get(0).currentTime >= this.openingVideo.get(0).duration) {
-            if (this.data.info) {
-                this.infofield.removeClass('hidden');
-                this.infofieldOpeningVideo.addClass('hidden');
-                this.infofieldOpeningVideo.get(0).currentTime = 0;
-            }
             this.state = 2;
         }
-    };
+     };
 
     Building.prototype.animateOut = function() {
         if (this.state === 3) {
@@ -76,13 +74,6 @@ var Building = (function() {
             this.closingVideo.get(0).play();
             this.closingVideo.removeClass('hidden');
             this.openingVideo.addClass('hidden');
-
-            if (this.data.info) {
-                this.infofieldClosingVideo.get(0).currentTime = 0;
-                this.infofieldClosingVideo.get(0).play();
-                this.infofieldClosingVideo.removeClass('hidden');
-                this.infofield.addClass('hidden');
-            }
             this.state = 4;
         }
         else if (this.state === 4 && this.closingVideo.get(0).currentTime >= this.closingVideo.get(0).duration) {
@@ -90,17 +81,54 @@ var Building = (function() {
             this.closingVideo.addClass('hidden');
             this.openingVideo.addClass('hidden');
 
+            this.state = 0;
+            this.active = false;
+        }
+    };
+
+    Building.prototype.animateInfoIn = function() {
+        if (this.infofieldState === 0) {
+            if (this.data.info) {
+                this.infofield.addClass('hidden');
+                this.infofieldOpeningVideo.removeClass('hidden');
+                this.infofieldOpeningVideo.get(0).currentTime = 0;
+                this.infofieldOpeningVideo.get(0).play();
+            }
+            this.infofieldState = 1;
+        }
+        else if (this.infofieldState === 1 && this.infofieldOpeningVideo.get(0).currentTime >= this.infofieldOpeningVideo.get(0).duration) {
+            if (this.data.info) {
+                this.infofield.removeClass('hidden');
+                this.infofieldOpeningVideo.addClass('hidden');
+                this.infofieldOpeningVideo.get(0).currentTime = 0;
+            }
+            this.infofieldState = 2;
+        }
+     };
+
+    Building.prototype.animateInfoOut = function() {
+        if (this.infofieldState === 3) {
+            if (this.data.info) {
+                this.infofieldClosingVideo.get(0).currentTime = 0;
+                this.infofieldClosingVideo.get(0).play();
+                this.infofieldClosingVideo.removeClass('hidden');
+                this.infofield.addClass('hidden');
+            }
+            this.infofieldState = 4;
+        }
+        else if (this.infofieldState === 4 && this.infofieldClosingVideo.get(0).currentTime >= this.infofieldClosingVideo.get(0).duration) {
             if (this.data.info) {
                 this.infofield.addClass('hidden');
                 this.infofieldClosingVideo.addClass('hidden');
                 this.infofield.addClass('hidden');
                 this.infofieldClosingVideo.get(0).currentTime = 0;
             }
-
-            this.state = 0;
+            this.infofieldState = 0;
             this.active = false;
         }
     };
+
+
 
     return Building;
 
