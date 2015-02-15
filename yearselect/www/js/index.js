@@ -235,6 +235,4 @@ var snaptimer;
 
 var snap = function() {};
 
-var changeYear = function() {};
-
 setYear( 1951 );
