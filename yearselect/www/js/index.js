@@ -2,7 +2,7 @@ var firstyear = 1900,
     lastyear = 2015,
     yearspacing = 200;
 
-var width = window.innerWidth;
+var width = 1080;
 var height = 200;
 
 //var time = 0

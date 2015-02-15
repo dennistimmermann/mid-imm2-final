@@ -9,7 +9,7 @@ function changeYear(year) {
     currentYear = year;
     for (var i = 0; i < buildings.length; i++) {
         if (buildings[i].data && buildings[i].active === true) {
-            buildings[i].state = 3;
+            buildings[i].close(year);
         }
     }
 }
