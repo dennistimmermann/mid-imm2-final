@@ -19,7 +19,8 @@ var stage = new PIXI.Stage( 0x000000 );
 var renderer = PIXI.autoDetectRenderer( width, height );
 
 // add the renderer view element to the DOM
-document.getElementById( 'controls' ).appendChild( renderer.view );
+//document.getElementById('controls').appendChild( renderer.view );
+document.body.appendChild( renderer.view );
 
 requestAnimFrame( animate );
 
@@ -41,9 +42,12 @@ function animate(timestamp) {
         updateText( yearContainer );
     }
 
-    velocity = velocity / 1.1;
-    if (Math.abs( velocity ) < 0.00001) {
+    //velocity = velocity / 1.1;
+    if (Math.abs( velocity ) < 0.001) {
         velocity = 0;
+        snapYear(getYear());
+
+        // JAHR EINGESTELLT
     }
 
     requestAnimFrame( animate );
@@ -114,27 +118,46 @@ document.addEventListener( 'keydown', function(e) {
         yearContainer.x += 100;
     }
 
-    var curpos = (yearContainer.x - width / 2);
-    var intpos = curpos % yearspacing;
-    var curyear = Math.round( -1 * curpos / yearspacing + firstyear );
 
-    if (intpos > -100) {
-    //left
-    //curyear = Math.round(-1*curpos/200+firstyear)
-    //console.log("right of", )
-    } else {
-        //right
-        //console.log("left of", Math.round(-1*curpos/200+firstyear))
-    }
+    // if (intpos > -100) {
+    // //left
+    // //curyear = Math.round(-1*curpos/200+firstyear)
+    // //console.log("right of", )
+    // } else {
+    //     //right
+    //     //console.log("left of", Math.round(-1*curpos/200+firstyear))
+    // }
+
+    var curyear = getYear();
     if (e.keyCode == 38) {
         //center
         console.log( curyear );
         console.log( (curyear - firstyear) * yearspacing + width / 2 );
-        yearContainer.x = -1 * ((curyear - firstyear) * yearspacing - width / 2);
+        setYear(curyear);
+        //yearContainer.x = -1 * ((curyear - firstyear) * yearspacing - width / 2);
     }
 
     console.log( (yearContainer.x - width / 2) % 200 );
 } );
+
+var getYear = function() {
+    var curpos = (yearContainer.x - width / 2);
+    var intpos = curpos % yearspacing;
+    var curyear = Math.round( -1 * curpos / yearspacing + firstyear );
+    return curyear;
+}
+
+var getYearX = function(year) {
+    return (-1 * ((year - firstyear) * yearspacing - width / 2));
+}
+
+var setYear = function(year) {
+    yearContainer.x = getYearX(year);
+};
+
+var snapYear = function(year) {
+    yearContainer.x = yearContainer.x + ((getYearX(year) - yearContainer.x)/10)
+}
 
 var updateText = function(parent) {
     years.forEach( function(e, i, arr) {
@@ -146,7 +169,8 @@ var updateText = function(parent) {
     } );
 };
 
-var wsUri = 'ws://nomnom-server.tmrmn.com';
+//var wsUri = 'ws://nomnom-server.tmrmn.com';
+var wsUri = 'ws://127.0.0.1:8069';
 var websocket;
 
 var connect = function() {
@@ -174,31 +198,31 @@ var onClose = function(evt) {
 
 var onMessage = function(evt) {
     //console.log('>', evt.data);
-    // decode( evt.data, function(action) {
-    //     if (action.type == 'tap') {
-    //         // do stuff
-    //         console.log( action );
-    //         //	{
-    //         //		type: 'tap',
-    //         //		point: [Number 0..3]		<- welcher punkt angetippt wurde. Fuer den prototypen 0 bis 3
-    //         //	}
-    //     }
-    //     if (action.type == 'swipe') {
-    //         // do stuff
-    //         console.log( action );
-    //         velocity = action.velocity;
-    //         //yearContainer.x -=action.velocity*5;
-    //         //updateText(yearContainer)
-    //         //	{
-    //         // 		type: 'swipe',
-    //         // 		direction: 'left'|'right',
-    //         // 		velocity: [Number],			<- weiß noch noicht, ob das genutzt wird. Damit die Jahre bei der anzeige langsam stoppen und nicht abrupt
-    //         // 		step: [Number]				<- wie viele jahre weiter/zurück geblättert werden soll. Wahrscheinlich eher über velocity
-    //         //	}
-    //     }
-    // }, function(e) {
-    //         console.log( 'oh noes,\n', e );
-    //     } );
+    decode( evt.data, function(action) {
+        if (action.type == 'tap') {
+            // do stuff
+            //console.log( action );
+            //   {
+            //       type: 'tap',
+            //       point: [Number 0..3]        <- welcher punkt angetippt wurde. Fuer den prototypen 0 bis 3
+            //   }
+        }
+        if (action.type == 'swipe') {
+            // do stuff
+            //console.log( action );
+            velocity = action.velocity;
+            //yearContainer.x -=action.velocity*5;
+            //updateText(yearContainer)
+            //   {
+            //       type: 'swipe',
+            //       direction: 'left'|'right',
+            //       velocity: [Number],         <- weiß noch noicht, ob das genutzt wird. Damit die Jahre bei der anzeige langsam stoppen und nicht abrupt
+            //       step: [Number]              <- wie viele jahre weiter/zurück geblättert werden soll. Wahrscheinlich eher über velocity
+            //   }
+        }
+    }, function(e) {
+            console.log( 'oh noes,\n', e );
+        } );
 
     if (evt.data == 'next') {
         advance();
@@ -211,101 +235,6 @@ var snaptimer;
 
 var snap = function() {};
 
-
-/// demo code
-///
-
-var tweens = [];
-var dummyStep = 0;
-
-
-tweens.push( new TWEEN.Tween( yearContainer ).to( {
-    x: '+300'
-}, 1500 )
-    .easing( TWEEN.Easing.Cubic.InOut ) );
-
-tweens.push( new TWEEN.Tween( yearContainer ).to( {
-    x: '-200'
-}, 1000 )
-    .easing( TWEEN.Easing.Cubic.InOut ) );
-
-tweens.push( new TWEEN.Tween( yearContainer ).to( {
-    x: '+500'
-}, 1000 )
-    .easing( TWEEN.Easing.Cubic.InOut ) );
-
-
-tweens.push( new TWEEN.Tween( yearContainer ).to( {
-    x: '-3400'
-}, 2000 )
-    .easing( TWEEN.Easing.Exponential.InOut ) );
-
-
-//dummy tweens
-// 20*10
-var dtw1 = new TWEEN.Tween( yearContainer ).to( {
-    x: '-200'
-}, 1000 )
-    .easing( TWEEN.Easing.Cubic.InOut ).onComplete( function() {
-    changeYear( 2008 );
-} );
-
-var dtw2 = new TWEEN.Tween( yearContainer ).to( {
-    x: '-1200'
-}, 3000 )
-    .easing( TWEEN.Easing.Cubic.InOut ).onComplete( function() {
-    changeYear( 2014 );
-} );
-
-var dtw3 = new TWEEN.Tween( yearContainer ).to( {
-    x: '+22200'
-}, 5000 )
-    .easing( TWEEN.Easing.Cubic.InOut ).onComplete( function() {
-    changeYear( 1903 );
-} );
-
-// var dtw4 = new TWEEN.Tween( yearContainer ).to( { x: "-2000"}, 1000 )
-//    .easing( TWEEN.Easing.Exponential.InOut )
-
 var changeYear = function() {};
 
-tweens.forEach( function(e, i, arr) {
-    if (arr[i + 1] != null) {
-        var next = arr[i + 1];
-        e.onComplete( function() {
-            next.start();
-        } );
-    }
-} );
-
-//tweens[0].start()
-
-var setYear = function(year) {
-    yearContainer.x = -1 * ((year - firstyear) * yearspacing - width / 2);
-};
-
-setYear( 2007 );
-
-var advance = function() {
-    switch (dummyStep) {
-        case 0:
-            dtw1.start();
-            break;
-        case 1:
-            dtw2.start();
-            break;
-        case 2:
-            dtw3.start();
-            break;
-        // case 3:
-        // 	dtw4.start()
-        // 	break;
-        // case 4:
-        // 	break;
-    }
-    dummyStep++;
-};
-
-document.addEventListener( 'click', function() {
-    advance();
-} );
+setYear( 1951 );

@@ -1,0 +1,7 @@
+{
+    "port": "/dev/tty.usbmodem376271",
+    "samplesize": 20,
+    "threshold": 0,
+    "jitter": 0.05
+
+};
